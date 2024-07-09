@@ -1,11 +1,14 @@
 package main
 
 import (
-    "flag"
-    "fmt"
-    "os"
-    "os/exec"
-    "path/filepath"
+	"bufio"
+	"encoding/json"
+	"flag"
+	"fmt"
+	"io/ioutil"
+	"os"
+	"os/exec"
+	"path/filepath"
 )
 
 type FfufResult struct {
