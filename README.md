@@ -29,6 +29,18 @@ cat wordlist.txt | ./ffuf-workflow -output valid_urls.txt
 - Ensure FFUF and `ffufPostprocessing` are installed and accessible in your PATH.
 - The tool handles both direct file input and piped input for convenience.
 
+
+## Installation Instructions
+
+Clone the Repository:
+`git clone https://github.com/nullenc0de/FFUF-Workflow-Tool.git`
+Navigate to the Directory:
+`cd FFUF-Workflow-Tool/`
+Build the Tool:
+`go build -o ffuf-workflow ./ffuf-workflow.go`
+Move the Executable to a Directory in Your PATH:
+`mv ffuf-workflow /usr/local/bin/`
+
 ## Example Workflow
 1. **Run FFUF**: Executes FFUF with the specified wordlist and saves results.
 2. **Post-process**: Uses `ffufPostprocessing` to handle FFUF results for extraction.
