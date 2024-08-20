@@ -12,7 +12,7 @@ This tool integrates ffuf and ffufPostprocessing to streamline your workflow.
 ### Option 1: Using `go install`
 
 ```
-go install github.com/yourusername/ffuf-workflow/cmd/ffuf-workflow@latest
+go install github.com/nullenc0de/ffuf-workflow/cmd/ffuf-workflow@latest
 ```
 
 Make sure your Go bin directory is in your PATH.
