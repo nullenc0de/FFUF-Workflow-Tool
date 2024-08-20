@@ -1,51 +1,47 @@
 # FFUF Workflow Tool
 
-## Overview
-This tool automates the process of running [FFUF](https://github.com/ffuf/ffuf) (Fuzz Faster U Fool) and post-processing its results to extract valid URLs. It supports both direct file input and piped input for wordlists.
+This tool integrates ffuf and ffufPostprocessing to streamline your workflow.
 
-## Features
-- **FFUF Execution**: Runs FFUF with specified parameters, including a wordlist of URLs.
-- **Post-processing**: Uses a custom post-processing tool (`ffufPostprocessing`) to handle FFUF output for further analysis.
-- **URL Extraction**: Extracts valid URLs from FFUF's JSON output.
-- **Output Handling**: Optionally saves extracted URLs to a specified output file.
+## Requirements
+
+- Go 1.21 or later
+- `ffuf` and `ffufPostprocessing` tools installed and available in your PATH
+
+## Installation
+
+### Option 1: Using `go install`
+
+```
+go install github.com/yourusername/ffuf-workflow/cmd/ffuf-workflow@latest
+```
+
+Make sure your Go bin directory is in your PATH.
+
+### Option 2: Cloning the repository
+
+1. Clone the repository:
+   ```
+   git clone https://github.com/yourusername/ffuf-workflow.git
+   cd ffuf-workflow
+   ```
+
+2. Build and install:
+   ```
+   make install
+   ```
 
 ## Usage
-```bash
-# Direct file input
-./ffuf-workflow -wordlist wordlist.txt -output valid_urls.txt
 
-# Piped input
-cat wordlist.txt | ./ffuf-workflow -output valid_urls.txt
+```
+ffuf-workflow -wordlist path/to/wordlist.txt -output path/to/output.txt
+```
 
-## Parameters
-- **wordlist**: Path to the wordlist file containing URLs.
-- **output**: (Optional) Path to save the extracted valid URLs.
+Or pipe input:
 
-## Dependencies
-- **FFUF**: Fuzzing tool used for URL fuzzing and testing.
-- **ffufPostprocessing**: Custom tool for post-processing FFUF results.
+```
+cat urls.txt | ffuf-workflow -output path/to/output.txt
+```
 
-## Notes
-- Ensure FFUF and `ffufPostprocessing` are installed and accessible in your PATH.
-- The tool handles both direct file input and piped input for convenience.
+## Compatibility
 
-
-## Installation Instructions
-
-Clone the Repository:
-`git clone https://github.com/nullenc0de/FFUF-Workflow-Tool.git`
-Navigate to the Directory:
-`cd FFUF-Workflow-Tool/`
-Build the Tool:
-`go build -o ffuf-workflow ./ffuf-workflow.go`
-Move the Executable to a Directory in Your PATH:
-`mv ffuf-workflow /usr/local/bin/`
-
-## Example Workflow
-1. **Run FFUF**: Executes FFUF with the specified wordlist and saves results.
-2. **Post-process**: Uses `ffufPostprocessing` to handle FFUF results for extraction.
-3. **Extract URLs**: Retrieves valid URLs from the processed output.
-4. **Output**: Optionally saves extracted URLs to a specified output file for further use.
-
-## License
-This tool is licensed under the MIT License. See LICENSE for more details.
+This tool is designed to be compatible with Go 1.21 and later versions. If you encounter any issues with newer Go versions, please report them in the GitHub issues section.
