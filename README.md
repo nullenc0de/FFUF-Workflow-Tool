@@ -9,26 +9,18 @@ This tool integrates ffuf and ffufPostprocessing to streamline your workflow.
 
 ## Installation
 
-### Option 1: Using `go install`
+To install the latest version of the FFUF Workflow Tool, use the following command:
 
 ```
-go install github.com/nullenc0de/ffuf-workflow/cmd/ffuf-workflow@latest
+go install github.com/nullenc0de/FFUF-Workflow-Tool/cmd/ffuf-workflow@latest
 ```
 
-Make sure your Go bin directory is in your PATH.
+Make sure your Go bin directory is in your PATH. You can verify the installation by running:
 
-### Option 2: Cloning the repository
-
-1. Clone the repository:
-   ```
-   git clone https://github.com/yourusername/ffuf-workflow.git
-   cd ffuf-workflow
-   ```
-
-2. Build and install:
-   ```
-   make install
-   ```
+```
+which ffuf-workflow
+ffuf-workflow -h
+```
 
 ## Usage
 
@@ -42,6 +34,22 @@ Or pipe input:
 cat urls.txt | ffuf-workflow -output path/to/output.txt
 ```
 
+## Building from Source
+
+If you prefer to build from source or want to contribute to the project, you can clone the repository and build manually:
+
+```
+git clone https://github.com/nullenc0de/FFUF-Workflow-Tool.git
+cd FFUF-Workflow-Tool
+go build -o ffuf-workflow ./cmd/ffuf-workflow
+```
+
+You can then move the built binary to a directory in your PATH or run it directly from the build location.
+
 ## Compatibility
 
-This tool is designed to be compatible with Go 1.21 and later versions. If you encounter any issues with newer Go versions, please report them in the GitHub issues section.
+This tool is designed to be compatible with Go 1.18 and later versions. If you encounter any issues with your Go version, please report them in the GitHub issues section.
+
+## Reporting Issues
+
+If you encounter any problems or have suggestions for improvements, please open an issue on the [GitHub repository](https://github.com/nullenc0de/FFUF-Workflow-Tool/issues).
