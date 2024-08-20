@@ -1,14 +1,15 @@
+// main.go
 package main
 
 import (
-    "bufio"
-    "encoding/json"
-    "flag"
-    "fmt"
-    "io/ioutil"
-    "os"
-    "os/exec"
-    "path/filepath"
+	"bufio"
+	"encoding/json"
+	"flag"
+	"fmt"
+	"io/ioutil"
+	"os"
+	"os/exec"
+	"path/filepath"
 )
 
 type FfufResult struct {
@@ -17,23 +18,28 @@ type FfufResult struct {
 	} `json:"results"`
 }
 
+func runCommand(name string, args ...string) error {
+	cmd := exec.Command(name, args...)
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	return cmd.Run()
+}
+
 func runFfuf(wordlist, outputDir string) error {
-	cmd := exec.Command("ffuf",
+	return runCommand("ffuf",
 		"-w", wordlist,
 		"-u", "FUZZ",
 		"-o", filepath.Join(outputDir, "results.json"),
 		"-od", filepath.Join(outputDir, "bodies"),
 		"-of", "json")
-	return cmd.Run()
 }
 
 func runFfufPostprocessing(outputDir string) error {
-	cmd := exec.Command("ffufPostprocessing",
+	return runCommand("ffufPostprocessing",
 		"-result-file", filepath.Join(outputDir, "results.json"),
 		"-bodies-folder", filepath.Join(outputDir, "bodies"),
 		"-delete-bodies",
 		"-overwrite-result-file")
-	return cmd.Run()
 }
 
 func extractUrls(resultsFile string) ([]string, error) {
@@ -41,12 +47,10 @@ func extractUrls(resultsFile string) ([]string, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	var result FfufResult
 	if err := json.Unmarshal(data, &result); err != nil {
 		return nil, err
 	}
-
 	var urls []string
 	for _, r := range result.Results {
 		urls = append(urls, r.URL)
@@ -72,7 +76,6 @@ func main() {
 			os.Exit(1)
 		}
 		defer os.Remove(tempFile.Name())
-
 		for scanner.Scan() {
 			tempFile.WriteString(scanner.Text() + "\n")
 		}
